@@ -5,12 +5,12 @@
 **Domain Model**
 | Objects | Properties     | Messages                          | Output |
 | ------- | -------------- | --------------------------------- | ------ |
-| Bank | Account @Object[] | createAccount(accountId @Integer) | @Boolean  |
+| Bank | Account @Object[] | createAccount() | @Boolean  |
 | Account | accountId @Integer    |    |    |
 
 **Tests**
 - [ ] createAccount should return true if account was created
-- [ ] createAccount should increase the length of Account array by 1
+- [ ] accountId should be added to the new Account
 
 ### User Story 2
 ![As a customer, I want to be able to deposit money in my bank account, so that I can increase my bank balance](image-2.png)
@@ -18,10 +18,9 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | accountId @Integer<br>balance @Integer<br>statement @Array[@type, @amount, @date] | deposit(@accountId, @Integer, @date) | @Boolean         |
+| Account | balance @Integer<br>statement @Array[@type, @amount, @date] | deposit(@Integer, @date) | @Boolean         |
 
 **Tests**
-- [ ] deposit should only be deposited to an matching account
 - [ ] deposit should return true if successful and money added to account
 - [ ] balance in account should reflect increase in money deposited
 
@@ -29,12 +28,11 @@
 ![As a customer, I'd like to be able to withdraw money from my account, so that I can spend it](image-3.png)
 
 **Domain Model**
-| Objects | Properties                                                                    | Messages                             | Output   |
-| ------- | ----------------------------------------------------------------------------- | ------------------------------------ | -------- |
-| Account | accountId @Integer<br>balance @Integer<br>statement @Array[@type, @amount, @date] | withdraw(@accountId, @Integer, @date) | @Boolean |
+| Objects | Properties                                                           | Messages                             | Output   |
+| ------- | -------------------------------------------------------------------- | ------------------------------------ | -------- |
+| Account | balance @Integer<br>statement @Array[@type, @amount, @date]          | withdraw(@Integer, @date) | @Boolean |          |
 
 **Tests**
-- [ ] withdraw should only withdrawn from matching account
 - [ ] withdraw should deduct the withdrawn amount from the balance
 - [ ] if amount is withdrawn successfully, return true
 
@@ -44,7 +42,7 @@
 **Domain Model**
 | Objects | Properties                                                                    | Messages                              | Output   |
 | ------- | ----------------------------------------------------------------------------- | ------------------------------------- | -------- |
-| Account | accountId @Integer<br>balance @Integer<br>statement @Array[@type, @amount, @date] | withdraw(@accountId, @Integer, @date) | @Boolean |
+| Account | balance @Integer<br>statement @Array[@type, @amount, @date] | withdraw(@Integer, @date) | @Boolean |
 
 **Tests**
 - [ ] balance should not go past 0 if withdraw amount is more than balance
@@ -56,13 +54,12 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | balance @Integer <br>accountId @Integer   | getBalance(accountId @Integer)        | @Integer |
+| Account | balance @Integer   | getBalance()                      | @Integer |
 
 **Tests**
 - [ ] getBalance should return the amount of money currently in the account
 - [ ] After depositing money, getBalance should increase by the amount deposited
 - [ ] After withdrawing money, getBalance should decrease by the amount requested or up to the balance reaching 0.
-- [ ] getBalance should shown an error is account doesn't exist
 
 ### User Story 6
 ![As a customer, I'd like to be able to print my statement, so I can see and check my deposits and withdraws](image-6.png)
@@ -70,12 +67,70 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | statement @Array[@type, @amount, @date] <br>accountId @Integer | printStatement(accountId @Int)                              | @String         |
+| Account | statement @Array[@type, @amount, @date]| printStatement()      | @String         |
 
 **Tests**
 - [ ] printStatement should return all the transactions made to the account in chronological order
 - [ ] after depositing money, printStatement should add the transaction details to the top of the list
 - [ ] after withdrawing money, printStatement should add the transaction details to the top of the list
+
+### User Story 7
+![As a customer I'd like to be able to see my account balance colour coordinated, so the information is clear](image-7.png)
+
+**Domain Model**
+| Objects | Properties         | Messages                          | Output   |
+| ------- | ------------------ | --------------------------------- | -------- |
+| Account | statement @Array[@type, @amount, @date] | printStatement()                                  | @String         |
+
+**Tests**
+- [ ] The output of the statement should be formatted so credits and positive balances appear in green text
+- [ ] The output of the statement should be formatted so debits and negative balances appear in red text
+
+### User Story 8
+![As a customer I want to be able to add an overdraft to my account, so that I can withdraw more than my balance](image-8.png)
+
+**Domain Model**
+| Objects | Properties         | Messages                          | Output   |
+| ------- | ------------------ | --------------------------------- | -------- |
+| Account | overdraft @Integer | addOverdraft()                    | @Boolean |
+
+**Tests**
+- [ ] addOverdraft should return true when an overdraft is added to the account
+
+### User Story 9
+![As a customer, I want to be able to set the overdraft to my account, so that I can choose the overdraft balance](image-9.png)
+
+**Domain Model**
+| Objects | Properties         | Messages                          | Output   |
+| ------- | ------------------ | --------------------------------- | -------- |
+| Account | overdraft @Integer | addOverdraft(@Integer)            | @Boolean |
+
+**Tests**
+- [ ] addOverdraft should pass through a value which sets the overdraft limit as entered
+
+### User Story 10
+![As a customer, I want access my overdraft if my withdrawal exceeds my bank balance, so that I can withdraw the full amount of funds I need](image-10.png)
+
+**Domain Model**
+| Objects | Properties         | Messages                          | Output   |
+| ------- | ------------------ | --------------------------------- | -------- |
+| Account | overdraft @Integer<br>balance @Int | withdraw(@Integer)| @Boolean |
+
+**Tests**
+- [ ] If account has an overdraft set, allow the customer to withdraw money past their available balance.
+- [ ] When withdraw is called, overdraft should not exceed the overdraft limit set.
+
+### User Story 11
+![As a customer, I want change my overdraft limit, so that I can withdraw and borrow more funds](image-11.png)
+
+**Domain Model**
+| Objects | Properties         | Messages                          | Output   |
+| ------- | ------------------ | --------------------------------- | -------- |
+| Account | overdraft @Integer | setOverdraft(@Integer)            | @Boolean |
+
+**Tests**
+- [ ] If account has an overdraft set, setOverdraft should change the overdraft balance to the new value.
+- [ ] If account has an overdraft set, setOverdraft should not change the overdraft limit lower than the current balance.
 
 ## Kanban Board
 I used a kanban board on Miro to help organise my user stories and production tickets.\
