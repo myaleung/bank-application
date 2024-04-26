@@ -26,4 +26,8 @@ export default class Account {
         this.#statement.push(transaction);
         return true;
     };
+
+    withdraw = (value) => { 
+        return true
+    }
 }

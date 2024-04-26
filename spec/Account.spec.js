@@ -69,5 +69,13 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"date": new Date().toLocaleDateString()}));
         });
+
+        it("should return true if money was deducted from account", () => { 
+            //Arrange
+            const expected = true;
+            //Act
+            //Assert
+            expect(testAccount.withdraw(100)).toBe(expected);
+        });
     });
 });
