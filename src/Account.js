@@ -18,17 +18,28 @@ export default class Account {
         const tMonth = String(newDate.getMonth() + 1).padStart(2, '0');
         const tDate = newDate.getDate() + "/" + tMonth + "/" + newDate.getFullYear();
         const transaction = {
-            "type": "deposit",
+            "type": "credit",
             "value": value,
             "date": tDate,
         };
+
         this.#balance += value;
         this.#statement.push(transaction);
         return true;
     };
 
-    withdraw = (value) => { 
+    withdraw = (value, date) => { 
+        const newDate = new Date(date);
+        const tMonth = String(newDate.getMonth() + 1).padStart(2, '0');
+        const tDate = newDate.getDate() + "/" + tMonth + "/" + newDate.getFullYear();
+        const transaction = {
+            "type": "debit",
+            "value": value,
+            "date": tDate,
+        };
+
         this.#balance -= value;
+        this.#statement.push(transaction);
         return true
     }
 }

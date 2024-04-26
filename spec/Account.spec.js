@@ -53,7 +53,7 @@ describe("Account Class Tests:", () => {
         
         it("should save the date of the deposit as passed", () => { 
             //Arrange
-            const date = "2012-01-13";
+            const date = "2012-01-10";
             const money = 1000;
             //Act
             testAccount.deposit(money, date);
@@ -67,7 +67,7 @@ describe("Account Class Tests:", () => {
             //Act
             testAccount.deposit(money);
             //Assert
-            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"date": new Date().toLocaleDateString()}));
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"type": "credit", "date": new Date().toLocaleDateString()}));
         });
 
         it("should return true if money was deducted from account", () => { 
@@ -87,6 +87,16 @@ describe("Account Class Tests:", () => {
             testAccount.withdraw(request);
             //Assert
             expect(testAccount.getBalance()).toEqual(total);
+        });
+
+        it("should save the date of the withdrawal as passed", () => { 
+            //Arrange
+            const date = "2012-01-13";
+            const request = 200;
+            //Act
+            testAccount.withdraw(request, date);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date(date).toLocaleDateString() }));
         });
     });
 });
