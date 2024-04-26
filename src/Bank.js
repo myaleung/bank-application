@@ -1,3 +1,4 @@
+import Account from "./Account.js";
 export default class Bank { 
     #name = "";
     #accounts = [];
@@ -10,6 +11,6 @@ export default class Bank {
     createAccount = () => {
         const accountsLength = this.#accounts.length + 1;
         const accountId = 1000 + accountsLength;
-        this.#accounts.push(accountId)
+        this.#accounts.push(new Account(accountId))
     }
 }

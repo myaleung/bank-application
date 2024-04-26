@@ -28,5 +28,15 @@ describe("Bank Class Tests:", () => {
             //Assert
             expect(testBank.getAccounts().length).toBe(expected);
         });
+        
+        it("should add a new accountId to the Account upon creation", () => { 
+            //Arrange
+            const testBank = new Bank("Digital Futures Bank");
+            let expected = 1000 + 1;
+            //Act
+            testBank.createAccount();
+            //Assert
+            expect(testBank.getAccounts()[0].getAccountId()).toEqual(expected);
+        });
     });
 });

@@ -1,4 +1,10 @@
 export default class Account { 
-    #accountId = 1000;
+    #accountId;
+
+    constructor(accountId) { 
+        this.#accountId = accountId;
+    }
+
+    getAccountId = () => this.#accountId;
 
 }
