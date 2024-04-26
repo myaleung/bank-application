@@ -43,11 +43,22 @@ describe("Account Class Tests:", () => {
         
         it("should reflect the increase in balance according to the value passed", () => { 
             //Arrange
-            const money = testAccount.getBalance() + 1000;
+            const money = 1000;
+            const total = testAccount.getBalance() + money;
             //Act
             testAccount.deposit(money)
             //Assert
-            expect(testAccount.getBalance()).toEqual(money);
+            expect(testAccount.getBalance()).toEqual(total);
+        });
+        
+        it("should save the date of the deposit as passed", () => { 
+            //Arrange
+            const date = "2012-01-13";
+            const money = testAccount.getBalance() + 1000;
+            //Act
+            testAccount.deposit(money, date);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"date": new Date(date).toLocaleDateString()}));
         });
     });
 });
