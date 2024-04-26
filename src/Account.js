@@ -15,9 +15,7 @@ export default class Account {
     getStatement = () => this.#statement;
 
     deposit = (value, date) => {
-        const newDate = date !== undefined ? new Date(date) : new Date();
-        const tMonth = String(newDate.getMonth() + 1).padStart(2, '0');
-        const tDate = newDate.getDate() + "/" + tMonth + "/" + newDate.getFullYear();
+        const tDate = dateReformatter(date);
         const transaction = {
             "type": "credit",
             "value": value,
@@ -30,9 +28,7 @@ export default class Account {
     };
 
     withdraw = (value, date) => { 
-        const newDate = date !== undefined ? new Date(date) : new Date();
-        const tMonth = String(newDate.getMonth() + 1).padStart(2, '0');
-        const tDate = newDate.getDate() + "/" + tMonth + "/" + newDate.getFullYear();
+        const tDate = dateReformatter(date);
         const transaction = {
             "type": "debit",
             "value": value,
