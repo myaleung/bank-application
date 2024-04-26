@@ -15,6 +15,14 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getAccountId()).toBe(1000);
         });
+        
+        // it("should have a balance property that is initialised to 0", () => { 
+        //     //Arrange
+        //     expected = 0;
+        //     //Act
+        //     //Assert
+        //     expect(testAccount.getBalance()).toBe(expected);
+        // });
     });
     
     describe("Account Balance Mutation Tests:", () => { 
@@ -25,11 +33,12 @@ describe("Account Class Tests:", () => {
             spyOn(testAccount, "getAccountId").and.callThrough();
         });
             
-        it("should return an ID if account is available", () => { 
+        it("should return true if money was added to account", () => { 
             //Arrange
+            const expected = true;
             //Act
             //Assert
-            expect(testAccount.getAccountId()).toBe(1000);
+            expect(testAccount.deposit(1000)).toBe(expected);
         });
     });
 });

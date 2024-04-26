@@ -57,6 +57,7 @@
 | Account | balance @Integer   | getBalance()                      | @Integer |
 
 **Tests**
+- [ ] Account should have a balance property that is initialized to 0
 - [ ] getBalance should return the amount of money currently in the account
 - [ ] After depositing money, getBalance should increase by the amount deposited
 - [ ] After withdrawing money, getBalance should decrease by the amount requested or up to the balance reaching 0.
