@@ -98,5 +98,14 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date(date).toLocaleDateString() }));
         });
+
+        it("should save the date of the withdrawal as today if undefined", () => { 
+            //Arrange
+            const request = 200;
+            //Act
+            testAccount.withdraw(request);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+        });
     });
 });
