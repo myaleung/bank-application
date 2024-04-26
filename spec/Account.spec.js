@@ -54,11 +54,20 @@ describe("Account Class Tests:", () => {
         it("should save the date of the deposit as passed", () => { 
             //Arrange
             const date = "2012-01-13";
-            const money = testAccount.getBalance() + 1000;
+            const money = 1000;
             //Act
             testAccount.deposit(money, date);
             //Assert
             expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"date": new Date(date).toLocaleDateString()}));
+        });
+        
+        it("should save the date of the deposit as today if undefined", () => { 
+            //Arrange
+            const money = 200;
+            //Act
+            testAccount.deposit(money);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"date": new Date().toLocaleDateString()}));
         });
     });
 });

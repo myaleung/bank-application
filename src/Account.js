@@ -14,9 +14,9 @@ export default class Account {
     getStatement = () => this.#statement;
 
     deposit = (value, date) => {
-        const newDate = new Date(date);
-        const tMonth = String(newDate.getMonth() + 1);
-        const tDate = newDate.getDate() + "/" + (tMonth.padStart(2, '0')) + "/" + newDate.getFullYear();
+        const newDate = date !== undefined ? new Date(date) : new Date();
+        const tMonth = String(newDate.getMonth() + 1).padStart(2, '0');
+        const tDate = newDate.getDate() + "/" + tMonth + "/" + newDate.getFullYear();
         const transaction = {
             "type": "deposit",
             "value": value,
