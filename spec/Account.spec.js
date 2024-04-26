@@ -77,5 +77,16 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.withdraw(100)).toBe(expected);
         });
+        
+        it("should reflect the decrease in balance according to the value passed", () => { 
+            //Arrange
+            testAccount.deposit(1000);
+            const request = 100;
+            const total = testAccount.getBalance() - request;
+            //Act
+            testAccount.withdraw(request);
+            //Assert
+            expect(testAccount.getBalance()).toEqual(total);
+        });
     });
 });

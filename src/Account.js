@@ -28,6 +28,7 @@ export default class Account {
     };
 
     withdraw = (value) => { 
+        this.#balance -= value;
         return true
     }
 }
