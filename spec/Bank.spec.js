@@ -12,6 +12,15 @@ describe("Bank Class Tests:", () => {
         
         it("should create a new account when createAccount is called", () => { 
             //Arrange
+            const testBank = jasmine.createSpyObj('Bank', ['createAccount']);
+            //Act
+            testBank.createAccount();
+            //Assert
+            expect(testBank.createAccount).toHaveBeenCalled();
+        });
+        
+        it("should increase accounts length by 1 when createAccount is called", () => { 
+            //Arrange
             const testBank = new Bank("Digital Futures Bank");
             let expected = testBank.getAccounts().length + 1;
             //Act
