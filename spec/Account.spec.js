@@ -15,14 +15,14 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getAccountId()).toBe(1000);
         });
-        
-        // it("should have a balance property that is initialised to 0", () => { 
-        //     //Arrange
-        //     expected = 0;
-        //     //Act
-        //     //Assert
-        //     expect(testAccount.getBalance()).toBe(expected);
-        // });
+
+        it("should have a balance property that is initialised to 0", () => { 
+            //Arrange
+            const expected = 0;
+            //Act
+            //Assert
+            expect(testAccount.getBalance()).toBe(expected);
+        });
     });
     
     describe("Account Balance Mutation Tests:", () => { 
@@ -39,6 +39,15 @@ describe("Account Class Tests:", () => {
             //Act
             //Assert
             expect(testAccount.deposit(1000)).toBe(expected);
+        });
+        
+        it("should reflect the increase in balance according to the value passed", () => { 
+            //Arrange
+            const money = testAccount.getBalance() + 1000;
+            //Act
+            testAccount.deposit(money)
+            //Assert
+            expect(testAccount.getBalance()).toEqual(money);
         });
     });
 });

@@ -18,11 +18,12 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | balance @Integer<br>statement @Array[@type, @amount, @date] | deposit(@Integer, @date) | @Boolean         |
+| Account | balance @Integer<br>statement @Array[@type, @amount, @date] | deposit(@Integer, @date)<br>getBalance() | @Boolean         |
 
 **Tests**
 - [ ] deposit should return true if successful and money added to account
 - [ ] balance in account should reflect increase in money deposited
+- [ ] date of deposit should be shown as today's date unless otherwise
 
 ### User Story 3
 ![As a customer, I'd like to be able to withdraw money from my account, so that I can spend it](image-3.png)
@@ -30,11 +31,12 @@
 **Domain Model**
 | Objects | Properties                                                           | Messages                             | Output   |
 | ------- | -------------------------------------------------------------------- | ------------------------------------ | -------- |
-| Account | balance @Integer<br>statement @Array[@type, @amount, @date]          | withdraw(@Integer, @date) | @Boolean |          |
+| Account | balance @Integer<br>statement @Array[@type, @amount, @date]          | withdraw(@Integer, @date)<br>getBalance() | @Boolean |          |
 
 **Tests**
-- [ ] withdraw should deduct the withdrawn amount from the balance
 - [ ] if amount is withdrawn successfully, return true
+- [ ] withdraw should deduct the withdrawn amount from the balance
+- [ ] date of withdraw should be shown as today's date unless otherwise
 
 ### User Story 4
 ![As a customer I want to only be able to withdraw from the funds I have, so that I can get sufficient funds](image-4.png)
@@ -57,7 +59,6 @@
 | Account | balance @Integer   | getBalance()                      | @Integer |
 
 **Tests**
-- [ ] Account should have a balance property that is initialized to 0
 - [ ] getBalance should return the amount of money currently in the account
 - [ ] After depositing money, getBalance should increase by the amount deposited
 - [ ] After withdrawing money, getBalance should decrease by the amount requested or up to the balance reaching 0.
