@@ -1,0 +1,15 @@
+export default class Bank { 
+    #name = "";
+    #accounts = [];
+    constructor(name) {
+        this.#name = name;
+    }
+
+    getAccounts = () => this.#accounts;
+
+    createAccount = () => {
+        const accountsLength = this.#accounts.length + 1;
+        const accountId = 1000 + accountsLength;
+        this.#accounts.push(accountId)
+    }
+}

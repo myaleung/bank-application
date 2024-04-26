@@ -5,7 +5,7 @@
 **Domain Model**
 | Objects | Properties     | Messages                          | Output |
 | ------- | -------------- | --------------------------------- | ------ |
-| Bank | Account @Object[] | createAccount() | @Boolean  |
+| Bank | name @String<br>Account @Object[] | createAccount() | @Boolean  |
 | Account | accountId @Integer    |    |    |
 
 **Tests**
