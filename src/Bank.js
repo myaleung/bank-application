@@ -12,5 +12,6 @@ export default class Bank {
         const accountsLength = this.#accounts.length + 1;
         const accountId = 1000 + accountsLength;
         this.#accounts.push(new Account(accountId))
+        if (this.getAccounts().length === accountsLength) return true;
     }
 }

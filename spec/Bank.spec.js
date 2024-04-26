@@ -2,9 +2,15 @@ import Bank from "../src/Bank.js";
 
 describe("Bank Class Tests:", () => { 
     describe("Bank Initialisation Tests:", () => { 
+        let testBank;
+
+        beforeEach(() => {
+            testBank = new Bank("Digital Futures Bank");
+            spyOn(testBank, "getAccounts").and.callThrough();
+        });
+
         it("should create a new instance of Bank class", () => { 
             //Arrange
-            const testBank = new Bank("Digital Futures Bank");
             //Act
             //Assert
             expect(testBank).toBeInstanceOf(Bank);
@@ -12,7 +18,7 @@ describe("Bank Class Tests:", () => {
         
         it("should create a new account when createAccount is called", () => { 
             //Arrange
-            const testBank = jasmine.createSpyObj('Bank', ['createAccount']);
+            testBank = jasmine.createSpyObj('Bank', ['createAccount']);
             //Act
             testBank.createAccount();
             //Assert
@@ -21,12 +27,19 @@ describe("Bank Class Tests:", () => {
         
         it("should increase accounts length by 1 when createAccount is called", () => { 
             //Arrange
-            const testBank = new Bank("Digital Futures Bank");
             let expected = testBank.getAccounts().length + 1;
             //Act
             testBank.createAccount();
             //Assert
             expect(testBank.getAccounts().length).toBe(expected);
+        });
+        
+        it("should return true if account was created", () => { 
+            //Arrange
+            let expected = true;
+            //Act
+            //Assert
+            expect(testBank.createAccount()).toBe(expected);
         });
         
         it("should add a new accountId to the Account upon creation", () => { 
