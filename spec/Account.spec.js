@@ -156,3 +156,24 @@ describe("Account Class Tests:", () => {
         });
     });
 });
+
+//TODO: Separate tests later
+describe("Printer Class Tests:", () => { 
+    describe("Printer Initialisation Tests:", () => { 
+        let testAccount;
+
+        beforeEach(() => {
+            testAccount = new Account(1000);
+            // testAccount = jasmine.createSpyObj("myAccount", { "accountId": 1000, balance: 0, statement: [] }, {"getAccountId()": testAccount.getAccountId(), "getStatement()": testAccount.getStatement()});
+        });
+            
+        it("should return an output of all transactions made in chronological order", () => { 
+            //Arrange
+            //Act
+            testAccount.deposit(230);
+            testAccount.withdraw(30);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+        });
+    });    
+});

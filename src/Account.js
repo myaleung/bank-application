@@ -45,11 +45,10 @@ export default class Account {
             const withdrawal = value - Math.abs(remainder);
             if (bal < 0) {
                 this.#balance = 0;
-                transaction["value"]= withdrawal;
+                transaction["value"] = withdrawal;
                 this.#statement.unshift(transaction);
                 return false;
-             }
-            
+             }            
         }
     }
 }
