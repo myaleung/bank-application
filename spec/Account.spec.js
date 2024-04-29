@@ -118,7 +118,17 @@ describe("Account Class Tests:", () => {
             //Act
             testAccount.withdraw(request);
             //Assert
-            expect(testAccount.getBalance()).toEqual(150);
+            expect(testAccount.withdraw(request)).toBe(false);
+        });
+        
+        it("should only withdraw amount up to the account balance", () => { 
+            //Arrange
+            const request = 200;
+            testAccount.deposit(150);
+            //Act
+            testAccount.withdraw(request);
+            //Assert
+            expect(testAccount.getBalance()).toEqual(0);
         });
     });
 });

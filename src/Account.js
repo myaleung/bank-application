@@ -39,7 +39,17 @@ export default class Account {
             this.#balance -= value;
             this.#statement.unshift(transaction);
             return true;
+        } else {
+            const bal = this.#balance -= value;
+            const remainder = this.#balance %= value;
+            const withdrawal = value - Math.abs(remainder);
+            if (bal < 0) {
+                this.#balance = 0;
+                transaction["value"]= withdrawal;
+                this.#statement.unshift(transaction);
+                return false;
+             }
+            
         }
-        return false;
     }
 }
