@@ -174,7 +174,8 @@ describe("Printer Class Tests:", () => {
             testAccount.deposit(230);
             testAccount.withdraw(30);
             //Assert
-            expect(Statement.printStatement(testAccount)).toEqual(testAccount.getStatement());
+            expect(Statement.printStatement(testAccount)).toContain("date".padEnd(12) + " || " + "credit".padEnd(10) + " || " + "debit".
+            padEnd(10) + " || " + "balance".padEnd(10) + "\n");
         });
             
         it("should return an output of all transactions made in chronological order", () => { 
@@ -183,7 +184,7 @@ describe("Printer Class Tests:", () => {
             testAccount.deposit(230);
             testAccount.withdraw(30);
             //Assert
-            expect(Statement.printStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+            expect(testAccount.getStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
         });
 
         it("should return the deposit details at the top of the list", () => { 
@@ -191,7 +192,7 @@ describe("Printer Class Tests:", () => {
             //Act
             testAccount.deposit(250);
             //Assert
-            expect(Statement.printStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "credit", "date": new Date().toLocaleDateString() }));
+            expect(testAccount.getStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "credit", "date": new Date().toLocaleDateString() }));
         });
         
         it("should return the deposit details at the top of the list", () => { 
@@ -200,7 +201,26 @@ describe("Printer Class Tests:", () => {
             testAccount.deposit(200);
             testAccount.withdraw(10);
             //Assert
-            expect(Statement.printStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+            expect(testAccount.getStatement(testAccount)[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
         });
-    });      
+    });    
+
+    // describe("Printer formatting Tests:", () => { 
+    //     let testAccount;
+
+    //     beforeEach(() => {
+    //         testAccount = new Account(1000);
+    //         // testAccount = jasmine.createSpyObj("myAccount", { "accountId": 1000, balance: 0, statement: [] }, {"getAccountId()": testAccount.getAccountId(), "getStatement()": testAccount.getStatement()});
+    //     });
+            
+    //     it("should show credits on the statement in green text", () => { 
+    //         //Arrange
+    //         const expected = 230;
+    //         //Act
+    //         testAccount.deposit(230);
+    //         testAccount.withdraw(30);
+    //         //Assert
+    //         expect(Statement.printStatement(testAccount).includes("credit")).toContain(console.log(chalk.green("credit")));
+    //     });
+    // });    
 });
