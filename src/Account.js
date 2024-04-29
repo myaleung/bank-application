@@ -17,9 +17,11 @@ export default class Account {
     deposit = (value, date) => {
         const tDate = dateReformatter(date);
         const transaction = {
+            "date": tDate,
             "type": "credit",
             "value": value,
-            "date": tDate,
+            "balance": this.#balance,
+
         };
 
         this.#balance += value;
@@ -33,6 +35,7 @@ export default class Account {
             "type": "debit",
             "value": value,
             "date": tDate,
+            "balance": this.#balance,
         };
 
         if (value <= this.#balance) {
