@@ -3,6 +3,7 @@ export default class Account {
     #accountId;
     #balance;
     #statement;
+    #overdraft;
 
     constructor(accountId) { 
         this.#accountId = accountId;
@@ -53,5 +54,9 @@ export default class Account {
                 return false;
              }            
         }
+    }
+
+    addOverdraft = () => { 
+        return true;
     }
 }

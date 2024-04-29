@@ -156,6 +156,23 @@ describe("Account Class Tests:", () => {
             expect(testAccount.getBalance()).toBe(1000);
         });
     });
+
+    describe("Account Overdraft Tests:", () => { 
+         let testAccount;
+
+        beforeEach(() => {
+            testAccount = new Account(1000);
+            spyOn(testAccount, "getAccountId").and.callThrough();
+        });
+
+        it("should set overdraft to true when called", () => { 
+            //Arrange
+            const expected = true;
+            //Act
+            //Assert
+            expect(testAccount.addOverdraft()).toBe(expected);
+        });
+    });
 });
 
 //TODO: Separate tests later
