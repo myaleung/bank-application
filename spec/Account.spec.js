@@ -128,7 +128,15 @@ describe("Account Class Tests:", () => {
             //Act
             testAccount.withdraw(request);
             //Assert
-            expect(testAccount.getBalance()).toEqual(0);
+            expect(testAccount.getBalance()).toBe(0);
+        });
+
+        it("should tell me my bank balance with getBalance", () => { 
+            //Arrange
+            //Act
+            testAccount.deposit(150);
+            //Assert
+            expect(testAccount.getBalance()).toBe(150);
         });
     });
 });
