@@ -175,5 +175,22 @@ describe("Printer Class Tests:", () => {
             //Assert
             expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
         });
+
+        it("should return the deposit details at the top of the list", () => { 
+            //Arrange
+            //Act
+            testAccount.deposit(250);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "credit", "date": new Date().toLocaleDateString() }));
+        });
+        
+        it("should return the deposit details at the top of the list", () => { 
+            //Arrange
+            //Act
+            testAccount.deposit(200);
+            testAccount.withdraw(10);
+            //Assert
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+        });
     });    
 });
