@@ -134,9 +134,25 @@ describe("Account Class Tests:", () => {
         it("should tell me my bank balance with getBalance", () => { 
             //Arrange
             //Act
+            //Assert
+            expect(testAccount.getBalance()).toBe(0);
+        });
+
+        it("should increase my bank balance by the amount deposited", () => { 
+            //Arrange
+            //Act
             testAccount.deposit(150);
             //Assert
             expect(testAccount.getBalance()).toBe(150);
+        });
+
+        it("should decrease my bank balance by the amount withdrawn", () => { 
+            //Arrange
+            testAccount.deposit(1500);
+            //Act
+            testAccount.withdraw(500);
+            //Assert
+            expect(testAccount.getBalance()).toBe(1000);
         });
     });
 });
