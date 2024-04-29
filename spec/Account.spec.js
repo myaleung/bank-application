@@ -73,6 +73,7 @@ describe("Account Class Tests:", () => {
         it("should return true if money was deducted from account", () => { 
             //Arrange
             const expected = true;
+            testAccount.deposit(1000);
             //Act
             //Assert
             expect(testAccount.withdraw(100)).toBe(expected);
@@ -93,6 +94,7 @@ describe("Account Class Tests:", () => {
             //Arrange
             const date = "2012-01-13";
             const request = 200;
+            testAccount.deposit(1000);
             //Act
             testAccount.withdraw(request, date);
             //Assert
@@ -102,10 +104,21 @@ describe("Account Class Tests:", () => {
         it("should save the date of the withdrawal as today if undefined", () => { 
             //Arrange
             const request = 200;
+            testAccount.deposit(1000);
             //Act
             testAccount.withdraw(request);
             //Assert
             expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "debit", "date": new Date().toLocaleDateString() }));
+        });
+
+        it("should not be able to remove cash and go into a negative balance if withdraw amount is higher than balance", () => { 
+            //Arrange
+            const request = 200;
+            testAccount.deposit(150);
+            //Act
+            testAccount.withdraw(request);
+            //Assert
+            expect(testAccount.getBalance()).toEqual(150);
         });
     });
 });

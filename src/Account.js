@@ -23,7 +23,7 @@ export default class Account {
         };
 
         this.#balance += value;
-        this.#statement.push(transaction);
+        this.#statement.unshift(transaction);
         return true;
     };
 
@@ -35,8 +35,11 @@ export default class Account {
             "date": tDate,
         };
 
-        this.#balance -= value;
-        this.#statement.push(transaction);
-        return true
+        if (value <= this.#balance) {
+            this.#balance -= value;
+            this.#statement.unshift(transaction);
+            return true;
+        }
+        return false;
     }
 }
