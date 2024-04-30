@@ -39,7 +39,7 @@ export default class Account {
             "date": tDate,
             "balance": this.#balance,
         };
-        //? If value is less than or equal to current account balance
+        //? If value is less than or equal to current account balance, deduct value
         if (value <= this.#balance) {
             this.#balance -= value;
             this.#statement.unshift(transaction);
@@ -47,17 +47,23 @@ export default class Account {
         } else {
             //? Check if balance goes into negative
             const bal = this.#balance -= value;
-            const remainder = this.#balance %= value;
-            const withdrawal = value - Math.abs(remainder);
-
-            if (bal < 0 && this.#overdraft ) { 
-                this.#balance = bal;
+            
+            //? See if the account has an overdraft to deduct from
+            if (bal < 0 && this.#overdraft) { 
+                if (bal <= this.#overdraftLimit) { 
+                    const remainder = this.#balance %= this.#overdraftLimit;
+                    this.#balance = bal + Math.abs(remainder);
+                    transaction["value"] = value - Math.abs(remainder);
+                } else {
+                    this.#balance = bal;
+                }
                 // transaction["value"] = value;
             }
-
+            //? Else only withdraw up till balance reaches 0
             if (bal < 0 && !this.#overdraft) { 
-                this.#balance = 0;
-                transaction["value"] = withdrawal;
+                const remainder = this.#balance %= value;
+                this.#balance = bal + Math.abs(remainder);
+                transaction["value"] = value - Math.abs(remainder);
             }
             this.#statement.unshift(transaction);
             return false;   

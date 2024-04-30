@@ -191,6 +191,16 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getBalance()).toBe(-100);
         });
+        
+        it("should allow withdrawals up to the value of the overdraft limit only", () => { 
+            //Arrange
+            testAccount.deposit(100);
+            testAccount.addOverdraft(300);
+            //Act
+            testAccount.withdraw(500);
+            //Assert
+            expect(testAccount.getBalance()).toBe(-300);
+        });
     });
 });
 
