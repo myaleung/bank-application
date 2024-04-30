@@ -181,6 +181,16 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getOverdraftLimit()).toBe(expected);
         });
+        
+        it("should allow withdrawals past the bank balance if overdraft is added on account", () => { 
+            //Arrange
+            testAccount.deposit(100);
+            testAccount.addOverdraft();
+            //Act
+            testAccount.withdraw(200);
+            //Assert
+            expect(testAccount.getBalance()).toBe(-100);
+        });
     });
 });
 
@@ -200,8 +210,7 @@ describe("Printer Class Tests:", () => {
             testAccount.deposit(230);
             testAccount.withdraw(30);
             //Assert
-            expect(Statement.printStatement(testAccount)).toContain("date".padEnd(12) + " || " + "credit".padEnd(10) + " || " + "debit".
-            padEnd(10) + " || " + "balance".padEnd(10) + "\n");
+            expect(Statement.printStatement(testAccount)).toContain("date".padEnd(13) + " || " + "credit".padEnd(9) + " || " + "debit".padEnd(10) + " || " + "balance".padEnd(10) + "\n");
         });
             
         it("should return an output of all transactions made in chronological order", () => { 
