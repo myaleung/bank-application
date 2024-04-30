@@ -182,14 +182,23 @@ describe("Account Class Tests:", () => {
             expect(testAccount.getOverdraftLimit()).toBe(expected);
         });
         
+        it("should set overdraft limit to 0 if value passed is undefined", () => { 
+            //Arrange
+            const expected = 0;
+            //Act
+            testAccount.addOverdraft();
+            //Assert
+            expect(testAccount.getOverdraftLimit()).toBe(expected);
+        });
+        
         it("should allow withdrawals past the bank balance if overdraft is added on account", () => { 
             //Arrange
             testAccount.deposit(100);
-            testAccount.addOverdraft();
+            testAccount.addOverdraft(100);
             //Act
-            testAccount.withdraw(200);
+            testAccount.withdraw(150);
             //Assert
-            expect(testAccount.getBalance()).toBe(-100);
+            expect(testAccount.getBalance()).toBe(-50);
         });
         
         it("should allow withdrawals up to the value of the overdraft limit only", () => { 

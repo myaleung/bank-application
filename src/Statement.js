@@ -13,10 +13,10 @@ export default class Statement {
         account.getStatement().forEach(transaction => {
             const date = transaction.date;
             const type = transaction.type;
-            const value = transaction.value.toString();
+            const amount = transaction.amount.toString();
             const balance = transaction.balance.toString();
             
-            result += `${date.padEnd(12)} || ${type === "credit" ? chalk.green(value.padEnd(10))+ "||".padEnd(13) : "|| ".padStart(13) + chalk.red(value.padEnd(10))} || ${Math.sign(transaction.balance) === 1 ? chalk.green(balance.padEnd(10)) :  chalk.red(balance.padEnd(10))}\n`;
+            result += `${date.padEnd(12)} || ${type === "credit" ? chalk.green(amount.padEnd(10))+ "||".padEnd(13) : "|| ".padStart(13) + chalk.red(amount.padEnd(10))} || ${Math.sign(transaction.balance) === 1 ? chalk.green(balance.padEnd(10)) :  chalk.red(balance.padEnd(10))}\n`;
         });
         return heading.concat(result);
     }

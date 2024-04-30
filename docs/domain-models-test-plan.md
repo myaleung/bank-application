@@ -105,7 +105,7 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | overdraft @Integer<br>overdraftLimit @Integer | addOverdraft(@Integer)<br>getOverdraftLimit()            | @Boolean<br>@Integer |
+| Account | overdraft @Boolean<br>overdraftLimit @Integer | addOverdraft(@Integer)<br>getOverdraftLimit()            | @Boolean<br>@Integer |
 
 **Tests**
 - [ ] addOverdraft should pass through a value which sets the overdraft limit as entered
@@ -116,7 +116,7 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | overdraft @Integer<br>balance @Int<br>overdraftLimit @Integer | withdraw(@Integer)| @Boolean |
+| Account | overdraft @Boolean<br>balance @Int<br>overdraftLimit @Integer | withdraw(@Integer)| @Boolean |
 
 **Tests**
 - [ ] If account has an overdraft set, allow the customer to withdraw money past their available balance.
@@ -128,7 +128,7 @@
 **Domain Model**
 | Objects | Properties         | Messages                          | Output   |
 | ------- | ------------------ | --------------------------------- | -------- |
-| Account | overdraft @Integer | setOverdraft(@Integer)            | @Boolean |
+| Account | overdraftLimit @Integer | setOverdraft(@Integer)            | @Boolean |
 
 **Tests**
 - [ ] If account has an overdraft set, setOverdraft should change the overdraft balance to the new value.
