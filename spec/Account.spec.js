@@ -172,6 +172,15 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.addOverdraft()).toBe(expected);
         });
+
+        it("should set overdraft limit to value passed", () => { 
+            //Arrange
+            const expected = 1000;
+            //Act
+            testAccount.addOverdraft(expected);
+            //Assert
+            expect(testAccount.getOverdraftLimit()).toBe(expected);
+        });
     });
 });
 

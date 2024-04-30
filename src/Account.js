@@ -4,16 +4,20 @@ export default class Account {
     #balance;
     #statement;
     #overdraft;
+    #overdraftLimit;
 
     constructor(accountId) { 
         this.#accountId = accountId;
         this.#balance = 0;
         this.#statement = [];
+        this.#overdraft = false;
     }
 
     getAccountId = () => this.#accountId;
     getBalance = () => this.#balance;
     getStatement = () => this.#statement;
+    hasOverdraft = () => this.#overdraft;
+    getOverdraftLimit = () => this.#overdraftLimit;
 
     deposit = (value, date) => {
         const tDate = dateReformatter(date);
@@ -56,7 +60,9 @@ export default class Account {
         }
     }
 
-    addOverdraft = () => { 
-        return true;
+    addOverdraft = (limit) => { 
+        this.#overdraft = true;
+        this.#overdraftLimit = limit;
+        return this.#overdraft;
     }
 }
