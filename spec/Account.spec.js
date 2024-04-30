@@ -219,6 +219,17 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getOverdraftLimit()).toBe(500);
         });
+        
+        it("should not change the overdraft limit lower than the balance", () => { 
+            //Arrange
+            testAccount.deposit(100);
+            testAccount.addOverdraft(100);
+            //Act
+            testAccount.withdraw(160);
+            testAccount.setOverdraft(50);
+            //Assert
+            expect(testAccount.setOverdraft()).toBe(false);
+        });
     });
 });
 

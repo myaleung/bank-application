@@ -79,7 +79,10 @@ export default class Account {
     }
 
     setOverdraft = (newLimit) => { 
-        this.#overdraftLimit = newLimit;
-        return true;
+        if (this.hasOverdraft() && -newLimit < this.#balance) {
+            this.#overdraftLimit = newLimit;
+            return true;
+        }
+        return false;
     }
 }
