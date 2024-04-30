@@ -210,6 +210,15 @@ describe("Account Class Tests:", () => {
             //Assert
             expect(testAccount.getBalance()).toBe(-300);
         });
+        
+        it("should allow the overdraft limit to change", () => { 
+            //Arrange
+            testAccount.addOverdraft(300);
+            //Act
+            testAccount.setOverdraft(500);
+            //Assert
+            expect(testAccount.getOverdraftLimit()).toBe(500);
+        });
     });
 });
 

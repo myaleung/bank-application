@@ -77,4 +77,9 @@ export default class Account {
         }
         return this.#overdraft;
     }
+
+    setOverdraft = (newLimit) => { 
+        this.#overdraftLimit = newLimit;
+        return true;
+    }
 }
