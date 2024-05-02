@@ -64,10 +64,26 @@ describe("Printer Class Tests:", () => {
             testAccount.withdraw(30);
             console.log(Statement.printStatement(testAccount));
             //Assert
-            const sections = console.log.calls.mostRecent().args[0].split(' ');
+            const sections = console.log.calls.mostRecent().args[0].split('||');
             sections.forEach(section => {
                 if (section.includes(chalk.green('230.00'))) {
                     expect(section).toEqual(chalk.green('230.00'));
+                }
+            });
+        });
+
+        it("should show debits on the statement in red text", () => { 
+            //Arrange
+            spyOn(console, 'log');
+            //Act
+            testAccount.deposit(230);
+            testAccount.withdraw(30);
+            console.log(Statement.printStatement(testAccount));
+            //Assert
+            const sections = console.log.calls.mostRecent().args[0].split('||');
+            sections.forEach(section => {
+                if (section.includes(chalk.red('30.00'))) {
+                    expect(section).toEqual(chalk.red('30.00'));
                 }
             });
         });
