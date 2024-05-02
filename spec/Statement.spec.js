@@ -8,7 +8,7 @@ describe("Printer Class Tests:", () => {
 
         beforeEach(() => {
             testAccount = new Account(1000);
-            // testAccount = jasmine.createSpyObj("myAccount", { "accountId": 1000, balance: 0, statement: [] }, {"deposit()": testAccount.deposit(), "withdraw()": testAccount.withdraw()});
+            spyOn(Statement, 'printStatement').and.callThrough();;
         });
 
         it("should print statements from the account given", () => { 
@@ -53,6 +53,7 @@ describe("Printer Class Tests:", () => {
         beforeEach(() => {
             testAccount = new Account(1000);
             // testAccount = jasmine.createSpyObj("myAccount", { "accountId": 1000, balance: 0, statement: [] }, {"getAccountId()": testAccount.getAccountId(), "getStatement()": testAccount.getStatement()});
+            spyOn(Statement, 'printStatement').and.callThrough();;
         });
             
         it("should show credits on the statement in green text", () => { 
