@@ -39,32 +39,25 @@ export default class Account {
             "date": tDate,
             "balance": this.#balance,
         };
-        //? If value is less than or equal to current account balance, deduct value
+
+        if (this.#overdraft) {
+            this.handleOverdraft(amount, tDate);
+            return;
+        }
+
         if (amount <= this.#balance) {
+            //? If value is less than or equal to current account balance, deduct value
             this.#balance -= amount;
             this.#statement.unshift(transaction);
             return true;
-        } else {
-            //? Check if balance goes into negative
-            const bal = this.#balance -= amount;            
-            //? See if the account has an overdraft to deduct from
-            if (bal < 0 && this.#overdraft) { 
-                if (bal <= -this.#overdraftLimit) { 
-                    const difference = bal + this.#overdraftLimit;
-                    this.#balance = this.#balance + Math.abs(difference);
-                    transaction["amount"] = amount - Math.abs(difference);
-                } else {
-                    this.#balance = bal;
-                }
-            }
-            //? Else only withdraw up till balance reaches 0
-            if (bal < 0 && !this.#overdraft) { 
-                const remainder = this.#balance %= amount;
-                this.#balance = bal + Math.abs(remainder);
-                transaction["amount"] = amount - Math.abs(remainder);
-            }
+        } else { 
+            //? Insufficient funds, only withdraw up until balance reaches 0
+            const bal = this.#balance - amount;
+            const withdrawn = amount - Math.abs(bal);
+            this.#balance -= withdrawn;
+            transaction["amount"] = withdrawn;
             this.#statement.unshift(transaction);
-            return false;   
+            return false; 
         }
     }
 
@@ -79,10 +72,35 @@ export default class Account {
     }
 
     setOverdraft = (newLimit) => { 
-        if (this.hasOverdraft() && -newLimit < this.#balance) {
+        if (this.hasOverdraft() && -newLimit <= this.#balance) {
             this.#overdraftLimit = newLimit;
             return true;
         }
         return false;
+    }
+
+    handleOverdraft = (amount, date) => { 
+        const transaction = {
+            "type": "debit",
+            "amount": amount,
+            "date": date,
+            "balance": this.#balance,
+        };
+        const availableBalance = this.#balance + this.#overdraftLimit;
+        
+        if (amount <= availableBalance) {
+            //? Withdraw money
+            this.#balance -= amount;
+            this.#statement.unshift(transaction);
+            return true;
+        } else { 
+            //? Insufficient funds, withdraw up till overdraft limit
+            const withdrawn = this.#balance + this.#overdraftLimit;
+
+            this.#balance -= withdrawn;
+            transaction["amount"] = withdrawn;
+            this.#statement.unshift(transaction);
+            return false;
+        }
     }
 }

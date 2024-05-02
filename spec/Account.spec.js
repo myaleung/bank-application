@@ -32,6 +32,11 @@ describe("Account Class Tests:", () => {
         beforeEach(() => {
             testAccount = new Account(1000);
             spyOn(testAccount, "getAccountId").and.callThrough();
+            jasmine.clock().install();
+        });
+        
+        afterEach(() => {
+            jasmine.clock().uninstall();
         });
             
         it("should return true if money was added to account", () => { 
@@ -68,7 +73,7 @@ describe("Account Class Tests:", () => {
             //Act
             testAccount.deposit(money);
             //Assert
-            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({"type": "credit", "date": new Date().toLocaleDateString()}));
+            expect(testAccount.getStatement()[0]).toEqual(jasmine.objectContaining({ "type": "credit", "date": new Date().toLocaleDateString() }));
         });
 
         it("should return true if money was deducted from account", () => { 
