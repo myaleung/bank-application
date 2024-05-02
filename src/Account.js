@@ -24,8 +24,8 @@ export default class Account {
         const transaction = {
             "date": tDate,
             "type": "credit",
-            "amount": amount,
-            "balance": this.#balance += amount,
+            "amount": amount.toFixed(2),
+            "balance": (this.#balance += amount).toFixed(2),
         };
         this.#statement.unshift(transaction);
         return true;
@@ -35,9 +35,9 @@ export default class Account {
         const tDate = dateReformatter(date);
         const transaction = {
             "type": "debit",
-            "amount": amount,
+            "amount": amount.toFixed(2),
             "date": tDate,
-            "balance": this.#balance,
+            "balance": this.#balance.toFixed(2),
         };
 
         if (this.#overdraft) {
@@ -82,9 +82,9 @@ export default class Account {
     handleOverdraft = (amount, date) => { 
         const transaction = {
             "type": "debit",
-            "amount": amount,
+            "amount": amount.toFixed(2),
             "date": date,
-            "balance": this.#balance,
+            "balance": this.#balance.toFixed(2),
         };
         const availableBalance = this.#balance + this.#overdraftLimit;
         
