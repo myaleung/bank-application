@@ -6,14 +6,14 @@ export default class Account {
     #overdraft;
     #overdraftLimit;
 
-    constructor(accountId) { 
-        this.#accountId = accountId;
+    constructor(id) { 
+        this.#accountId = id;
         this.#balance = 0;
         this.#statement = [];
         this.#overdraft = false;
     }
 
-    getAccountId = () => this.#accountId;
+    getAccountId = () => String(this.#accountId).padStart(5, '0');
     getBalance = () => this.#balance;
     getStatement = () => this.#statement;
     hasOverdraft = () => this.#overdraft;
@@ -29,8 +29,7 @@ export default class Account {
         const tDate = dateReformatter(date);
 
         if (this.#overdraft) {
-            this.handleOverdraft(amount, tDate);
-            return;
+            return this.handleOverdraft(amount, tDate);
         }
 
         if (amount <= this.#balance) {
@@ -89,7 +88,7 @@ export default class Account {
             "date": date,
             "type": type,
             "amount": amount.toFixed(2),
-            "balance": balance ? balance.toFixed(2) : this.#balance,
+            "balance": balance ? balance.toFixed(2) : this.#balance.toFixed(2),
         };
         this.#statement.unshift(transaction);
     }

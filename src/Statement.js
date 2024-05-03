@@ -3,11 +3,11 @@ import chalk from "chalk";
 export default class Statement {
     constructor() {
         if (new.target === Statement)
-            throw new Error("Cannot create instance of abstract class");
+            throw new Error("Cannot create instance of abstract Statement class");
     }
 
     static printStatement = (account) => {
-        const heading = "date".padEnd(13) + " || " + "credit".padEnd(9) + " || " + "debit".
+        const heading = "date".padEnd(12) + " || " + "credit".padEnd(9) + " || " + "debit".
             padEnd(10) + " || " + "balance".padEnd(10) + "\n";
         let result = ``;
         account.getStatement().forEach(transaction => {
