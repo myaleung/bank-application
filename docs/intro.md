@@ -40,6 +40,12 @@ The bank application is easy to use and straightforward to understand. Users can
 Statements can be printed on all accounts and will list the transactions in chronological order, where the latest is shown at the top. Though these transactions are appended based on the time of when this transaction was applied in the software. It doesn't sort the dates before printing but it should be included when this software is updated. There also isn't an error to handle when dates that are in the future are set when adding transactions. 
 Credits and debits as well as positive/negative account balances are shown in green and red respectively to help easily differentiate the amounts on the printed statement. 
 
+## Generative AI
+To help format the bank statement, I used a JS library called chalk to help colour the text the statement prints out. However, I had trouble testing this within Jasmine and ended up asking ChatGPT for help:
+![Jasmine testing of chalk](image-12.png)
+At first this helped check whether 'chalk' was called and for the full console log but it wasn't enough to check if chalk.green/chalk.red was used on a section of my output so I requested further knowledge how to check for a certain section of my output.
+![Jasmine testing of specific section of string with chalk](image-13.png)
+
 ## Install
 `npm i`
 
