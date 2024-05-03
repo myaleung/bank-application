@@ -7,9 +7,10 @@ const demoAccount = bank.createAccount();
 const demoAccount2 = bank.createAccount();
 
 console.log(chalk.bgMagentaBright(`//------Initialising Banking application------//\n`));
+
 console.log(`Welcome to ${bank.getName()} banking application.`);
-console.log(`Logging into account ID ${demoAccount.getAccountId()}.`);
 console.log(chalk.bgCyan(`>The program allows usage for different banks/branches and also create multiple accounts under the bank with different IDs for each.\n`));
+console.log(`Logging into account ID ${demoAccount.getAccountId()}.`);
 console.log(`Deposit 500 on 2024-04-30.`);
 console.log(demoAccount.deposit(500, '2024-04-30') && chalk.green(`The account balance is now ${demoAccount.getBalance()}.`));
 console.log(`Deposit 800.`);
