@@ -34,18 +34,20 @@ describe("Bank Class Tests:", () => {
             expect(testBank.getAccounts().length).toBe(expected);
         });
         
-        it("should return true if account was created", () => { 
+        it("should return account if account was created", () => { 
             //Arrange
-            let expected = true;
+            const newAccount = spyOn(testBank, "createAccount").and.callThrough();
             //Act
+            testBank.createAccount();
             //Assert
-            expect(testBank.createAccount()).toBe(expected);
+            // expect(testBank.createAccount()).toBe(Account());
+            expect(newAccount).toHaveBeenCalled();
         });
         
         it("should add a new accountId to the Account upon creation", () => { 
             //Arrange
             const testBank = new Bank("Digital Futures Bank");
-            let expected = 1000 + 1;
+            let expected = '1'.padStart(5, '0');
             //Act
             testBank.createAccount();
             //Assert

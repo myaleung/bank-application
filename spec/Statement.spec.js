@@ -17,7 +17,7 @@ describe("Printer Class Tests:", () => {
             testAccount.deposit(230);
             testAccount.withdraw(30);
             //Assert
-            expect(Statement.printStatement(testAccount)).toContain("date".padEnd(13) + " || " + "credit".padEnd(9) + " || " + "debit".padEnd(10) + " || " + "balance".padEnd(10) + "\n");
+            expect(Statement.printStatement(testAccount)).toContain("date".padEnd(12) + " || " + "credit".padEnd(9) + " || " + "debit".padEnd(10) + " || " + "balance".padEnd(10) + "\n");
         });
             
         it("should return an output of all transactions made in chronological order", () => { 

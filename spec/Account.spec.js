@@ -1,5 +1,4 @@
 import Account from "../src/Account.js";
-import Statement from "../src/Statement.js";
 
 describe("Account Class Tests:", () => { 
     describe("Account Initialisation Tests:", () => { 
@@ -12,9 +11,10 @@ describe("Account Class Tests:", () => {
             
         it("should return an ID if account is available", () => { 
             //Arrange
+            const id = '1000'.padStart(5, '0');
             //Act
             //Assert
-            expect(testAccount.getAccountId()).toBe(1000);
+            expect(testAccount.getAccountId()).toBe(id);
         });
 
         it("should have a balance property that is initialised to 0", () => { 
@@ -32,11 +32,6 @@ describe("Account Class Tests:", () => {
         beforeEach(() => {
             testAccount = new Account(1000);
             spyOn(testAccount, "getAccountId").and.callThrough();
-            jasmine.clock().install();
-        });
-        
-        afterEach(() => {
-            jasmine.clock().uninstall();
         });
             
         it("should return true if money was added to account", () => { 
