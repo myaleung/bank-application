@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/digital-futures-academy-se-2404-a/challenge-2-bank-myaleung.git"
+    "url": "git+https://github.com/myaleung/bank-application.git"
   },
   "keywords": [
     "bank",
@@ -23,9 +23,9 @@
   "author": "Amy Leung",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/digital-futures-academy-se-2404-a/challenge-2-bank-myaleung/issues"
+    "url": "https://github.com/myaleung/bank-application/issues"
   },
-  "homepage": "https://github.com/digital-futures-academy-se-2404-a/challenge-2-bank-myaleung#readme",
+  "homepage": "https://github.com/myaleung/bank-application#readme",
   "devDependencies": {
     "jasmine": "^5.1.0"
   },
